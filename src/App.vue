@@ -1,35 +1,70 @@
-<template>
-  <PageLayout style="min-height: 100vh">
-
-  </PageLayout>
-</template>
 <script setup>
 import {ref} from 'vue';
-import PageLayout from "@/components/PageLayout.vue";
+import AppContent from "@/components/AppContent.vue";
 
 const selectedKeys = ref(['2']);
 </script>
+
+<template>
+  <a-layout class="layout">
+    <!--Header-->
+    <a-layout-header>
+      <div class="logo"/>
+      <a-menu
+          v-model:selectedKeys="selectedKeys"
+          theme="dark"
+          mode="horizontal"
+          :style="{ lineHeight: '64px' }"
+      >
+        <a-menu-item key="1">nav 1</a-menu-item>
+        <a-menu-item key="2">nav 2</a-menu-item>
+        <a-menu-item key="3">nav 3</a-menu-item>
+      </a-menu>
+    </a-layout-header>
+    <!--Content-->
+    <a-layout-content class="content-container">
+      <!--面包屑-->
+      <a-breadcrumb class="content-breadcrumb">
+        <a-breadcrumb-item>Home</a-breadcrumb-item>
+        <a-breadcrumb-item>List</a-breadcrumb-item>
+        <a-breadcrumb-item>App</a-breadcrumb-item>
+      </a-breadcrumb>
+      <!--应用内容-->
+      <div class="content-main">
+        <AppContent/>
+      </div>
+    </a-layout-content>
+    <!--Footer-->
+    <a-layout-footer>
+      Ant Design ©2018 Created by Ant UED
+    </a-layout-footer>
+  </a-layout>
+</template>
+
 <style scoped>
-.site-layout-content {
-  min-height: 280px;
-  padding: 24px;
+
+.layout {
+  height: 100vh;
+}
+.content-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+}
+
+.content-breadcrumb {
+  flex-grow: 0;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.content-main {
+  flex-grow: 1;
   background: #fff;
+  padding: 24px;
 }
 
-#components-layout-demo-top .logo {
-  float: left;
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.ant-row-rtl #components-layout-demo-top .logo {
-  float: right;
-  margin: 16px 0 16px 24px;
-}
-
-[data-theme='dark'] .site-layout-content {
-  background: #141414;
+a-layout-footer {
+  text-align: center;
 }
 </style>
